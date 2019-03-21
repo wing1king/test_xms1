@@ -27,10 +27,10 @@ class MyTestCase(unittest.TestCase):
         sleep(2)
         try:
             if self.driver.find_element_by_id("bt_start_game").is_displayed():
-                print "校验通过，检测到开始游戏按钮"
-        except Exception, e:
-            print e
-            print "校验不通过"
+                print("校验通过，检测到开始游戏按钮")
+        except Exception as e:
+            print (e)
+            print("校验不通过")
         self.driver.get_screenshot_as_file(r"D:\test_jietu\zhangjieliebiao.png")
 
     def tearDown(self):

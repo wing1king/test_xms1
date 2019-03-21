@@ -1,4 +1,3 @@
-#coding:utf-8
 from time import *
 import unittest
 import warnings  # 忽略警告
