@@ -18,9 +18,9 @@ class App(object):
     def StopApp(self):
         """停止App"""
         #  结束App
-        #cmd = 'adb shell am force-stop com.idreamsky.avg.platform'
+        cmd = 'adb shell am force-stop com.idreamsky.avg.platform'
         #  推到后台
-        cmd = 'adb shell input keyevent 3'
+        # cmd = 'adb shell input keyevent 3'
         os.popen(cmd)
         time.sleep(5)
 

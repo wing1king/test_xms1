@@ -1,5 +1,5 @@
 from bs4 import BeautifulSoup
-import requests,sys,urllib3,time
+import requests, sys, urllib3, time
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 """
 注意：
@@ -8,6 +8,8 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 3.html5lib  为解决报错
 4.timeout=60000 为解决超时
 """
+
+
 class downloader(object):
 
     def __init__(self):
@@ -18,7 +20,7 @@ class downloader(object):
         self.nums = []
 
     def get_download_url(self):
-        res = requests.get(url=self.target,verify=False,timeout=60000)
+        res = requests.get(url=self.target, verify=False, timeout=60000)
         html = res.text
         div_bf = BeautifulSoup(html, 'html5lib')
         div = div_bf.find_all('div', class_='listmain' )
@@ -29,16 +31,15 @@ class downloader(object):
             self.names.append(each.string)
             self.urls.append(self.server + each.get('href'))
 
-
     def get_contents(self, target):
-        req = requests.get(url=target,verify=False,timeout=60000)
+        req = requests.get(url=target, verify=False, timeout=60000)
         html = req.text
         bf = BeautifulSoup(html, 'html5lib')
         texts = bf.find_all('div', class_='showtxt')
-        texts = texts[0].text.replace('\xa0'*8,'\n\n')
+        texts = texts[0].text.replace('\xa0'*8, '\n\n')
         return texts
 
-    def writer(self,name,path,text):
+    def writer(self, name, path, text):
         write_flag = True
         with open(path, 'a', encoding='utf-8') as f:
             f.write(name + '\n')

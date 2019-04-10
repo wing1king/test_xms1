@@ -16,9 +16,9 @@ class WSTestcase(unittest.TestCase):
 
     def test_1(self):
         # 滑动屏幕
-        for fouce_i in range(7):
-            swipe(v1=(950, 850), v2=(300, 850))
-            sleep(1)
+        # for fouce_i in range(5):
+        #     swipe(v1=(950, 850), v2=(300, 850))
+        #     sleep(1)
         touch((500, 500), times=1)
         sleep(5)
         # 点击屏幕
