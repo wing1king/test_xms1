@@ -1,0 +1,964 @@
+- config:
+    name: 会演互动Api
+    base_url: http://10.72.12.19:8055/v1
+    variables:
+        app_id: 123
+        debug: test
+        app_ver: 1.0
+        from: 2
+        time: 1
+        engine_ver: 1.0
+        os: 1
+
+- test:
+    name: 登录获取token
+    request:
+        data:
+            openid: 164b4571e4542ca8f2cc19776f7fd2f211111
+            sessionid: a9d384dd8ca7a22ec38505ddaf03eb6605b6a62661
+            userid: 2147483641
+            password: sddd
+            login_type: ledou
+            from_pf: ledou
+            productId: sddd1
+            debug: $debug
+            from: $from
+            os: $os
+            app_id: $app_id
+            app_ver: $app_ver
+            engine_ver: $engine_ver
+            time: $time
+        method: POST
+        url: /oauth/login-by-openid
+    extract:
+        access_token: content.data.access_token
+    validate:
+        - eq: [status_code, 200]
+        - eq: [content.msg, 操作成功]
+
+- test:
+    name: 关注用户
+    request:
+        data:
+            debug: $debug
+            from: $from
+            os: $os
+            app_id: $app_id
+            app_ver: $app_ver
+            engine_ver: $engine_ver
+            time: $time
+            access_token: $access_token
+            followUserId: 2285773069
+            type: 1
+        method: POST
+        url: /friend/follow
+    validate:
+        - eq: [status_code, 200]
+        - eq: [content.msg, 操作成功]
+
+- test:
+    name: 取消关注用户
+    request:
+        data:
+            debug: $debug
+            from: $from
+            os: $os
+            app_id: $app_id
+            app_ver: $app_ver
+            engine_ver: $engine_ver
+            time: $time
+            access_token: $access_token
+            followUserId: 2285773069
+            type: 1
+        method: POST
+        url: /friend/follow
+    validate:
+        - eq: [status_code, 200]
+        - eq: [content.msg, 操作成功]
+
+- test:
+    name: 我的关注
+    request:
+        data:
+            debug: $debug
+            from: $from
+            os: $os
+            app_id: $app_id
+            app_ver: $app_ver
+            engine_ver: $engine_ver
+            time: $time
+            access_token: $access_token
+        method: POST
+        url: /friend/following-list
+    validate:
+        - eq: [status_code, 200]
+        - eq: [content.msg, 操作成功]
+
+- test:
+    name: 我的好友
+    request:
+        data:
+            debug: $debug
+            from: $from
+            os: $os
+            app_id: $app_id
+            app_ver: $app_ver
+            engine_ver: $engine_ver
+            time: $time
+            access_token: $access_token
+        method: POST
+        url: /friend/friend-list
+    validate:
+        - eq: [status_code, 200]
+        - eq: [content.msg, 操作成功]
+
+- test:
+    name: 我的粉丝
+    request:
+        data:
+            debug: $debug
+            from: $from
+            os: $os
+            app_id: $app_id
+            app_ver: $app_ver
+            engine_ver: $engine_ver
+            time: $time
+            access_token: $access_token
+        method: POST
+        url: /friend/fans-list
+    validate:
+        - eq: [status_code, 200]
+        - eq: [content.msg, 操作成功]
+
+- test:
+    name: h5分享界面游戏详情
+    request:
+        params:
+            gameId: 1536817660145
+        method: GET
+        url: /game/h5-detail
+    validate:
+        - eq: [status_code, 200]
+        - eq: [content.msg, 操作成功]
+
+- test:
+    name: 举报评论、话题
+    request:
+        data:
+            debug: $debug
+            from: $from
+            os: $os
+            app_id: $app_id
+            app_ver: $app_ver
+            engine_ver: $engine_ver
+            time: $time
+            access_token: $access_token
+            reportUserId:
+            gameId:
+            topicId:
+            commentId:
+            reasonContent:
+        method: POST
+        url: /game/report-comment
+    validate:
+        - eq: [status_code, 200]
+        - eq: [content.msg, 操作成功]
+
+- test:
+    name: 打赏游戏
+    request:
+        data:
+            debug: $debug
+            from: $from
+            os: $os
+            app_id: $app_id
+            app_ver: $app_ver
+            engine_ver: $engine_ver
+            time: $time
+            access_token: $access_token
+            gameId: 1550476172493
+            VCDIA: 2
+            reward_id: 1
+        method: POST
+        url: /game/reward
+    validate:
+        - eq: [status_code, 200]
+        - eq: [content.msg, 操作成功]
+
+- test:
+    name: 打赏配置
+    request:
+        data:
+            debug: $debug
+            from: $from
+            os: $os
+            app_id: $app_id
+            app_ver: $app_ver
+            engine_ver: $engine_ver
+            time: $time
+            access_token: $access_token
+        method: POST
+        url: /game/reward-config
+    validate:
+        - eq: [status_code, 200]
+        - eq: [content.msg, 操作成功]
+
+- test:
+    name: 扣费
+    request:
+        data:
+            debug: $debug
+            from: $from
+            os: $os
+            app_id: $app_id
+            app_ver: $app_ver
+            engine_ver: $engine_ver
+            time: $time
+            access_token: $access_token
+            gameId:
+            type:
+            number:
+            code:
+        method: POST
+        url: /game/dedult
+    validate:
+        - eq: [status_code, 200]
+        - eq: [content.msg, 操作成功]
+
+- test:
+    name: 游戏收藏
+    request:
+        data:
+            debug: $debug
+            from: $from
+            os: $os
+            app_id: $app_id
+            app_ver: $app_ver
+            engine_ver: $engine_ver
+            time: $time
+            access_token: $access_token
+            gameId: 1550476172493
+            type: 0
+        method: POST
+        url: /game/game-collect
+    validate:
+        - eq: [status_code, 200]
+        - eq: [content.msg, 操作成功]
+
+- test:
+    name: 取消游戏收藏
+    request:
+        data:
+            debug: $debug
+            from: $from
+            os: $os
+            app_id: $app_id
+            app_ver: $app_ver
+            engine_ver: $engine_ver
+            time: $time
+            access_token: $access_token
+            gameId: 1550476172493
+            type: 1
+        method: POST
+        url: /game/game-collect
+    validate:
+        - eq: [status_code, 200]
+        - eq: [content.msg, 操作成功]
+
+- test:
+    name: 游戏点赞
+    request:
+        data:
+            debug: $debug
+            from: $from
+            os: $os
+            app_id: $app_id
+            app_ver: $app_ver
+            engine_ver: $engine_ver
+            time: $time
+            access_token: $access_token
+            gameId: 1550476172493
+            type: 0
+        method: POST
+        url: /game/game-praise
+    validate:
+        - eq: [status_code, 200]
+        - eq: [content.msg, 操作成功]
+
+- test:
+    name: 取消游戏点赞
+    request:
+        data:
+            debug: $debug
+            from: $from
+            os: $os
+            app_id: $app_id
+            app_ver: $app_ver
+            engine_ver: $engine_ver
+            time: $time
+            access_token: $access_token
+            gameId: 1550476172493
+            type: 1
+        method: POST
+        url: /game/game-praise
+    validate:
+        - eq: [status_code, 200]
+        - eq: [content.msg, 操作成功]
+
+- test:
+    name: 游戏章节列表
+    request:
+        data:
+            debug: $debug
+            from: $from
+            os: $os
+            app_id: $app_id
+            app_ver: $app_ver
+            engine_ver: $engine_ver
+            time: $time
+            access_token: $access_token
+            gameId: 1550476172493
+        method: POST
+        url: /game/chapters
+    validate:
+        - eq: [status_code, 200]
+        - eq: [content.msg, 操作成功]
+
+- test:
+    name: 游戏评论列表
+    request:
+        data:
+            debug: $debug
+            from: $from
+            os: $os
+            app_id: $app_id
+            app_ver: $app_ver
+            engine_ver: $engine_ver
+            time: $time
+            access_token: $access_token
+            gameId:
+
+        method: POST
+        url: /user/collect
+    validate:
+        - eq: [status_code, 200]
+        - eq: [content.msg, 操作成功]
+
+- test:
+    name: 我的游戏收藏
+    request:
+        data:
+            debug: $debug
+            from: $from
+            os: $os
+            app_id: $app_id
+            app_ver: $app_ver
+            engine_ver: $engine_ver
+            time: $time
+            access_token: $access_token
+        method: POST
+        url: /user/collect
+    validate:
+        - eq: [status_code, 200]
+        - eq: [content.msg, 操作成功]
+
+- test:
+    name: 我的游戏收藏
+    request:
+        data:
+            debug: $debug
+            from: $from
+            os: $os
+            app_id: $app_id
+            app_ver: $app_ver
+            engine_ver: $engine_ver
+            time: $time
+            access_token: $access_token
+        method: POST
+        url: /user/collect
+    validate:
+        - eq: [status_code, 200]
+        - eq: [content.msg, 操作成功]
+- test:
+    name: 我的游戏收藏
+    request:
+        data:
+            debug: $debug
+            from: $from
+            os: $os
+            app_id: $app_id
+            app_ver: $app_ver
+            engine_ver: $engine_ver
+            time: $time
+            access_token: $access_token
+        method: POST
+        url: /user/collect
+    validate:
+        - eq: [status_code, 200]
+        - eq: [content.msg, 操作成功]
+
+- test:
+    name: 我的游戏收藏
+    request:
+        data:
+            debug: $debug
+            from: $from
+            os: $os
+            app_id: $app_id
+            app_ver: $app_ver
+            engine_ver: $engine_ver
+            time: $time
+            access_token: $access_token
+        method: POST
+        url: /user/collect
+    validate:
+        - eq: [status_code, 200]
+        - eq: [content.msg, 操作成功]
+
+- test:
+    name: 我的游戏收藏
+    request:
+        data:
+            debug: $debug
+            from: $from
+            os: $os
+            app_id: $app_id
+            app_ver: $app_ver
+            engine_ver: $engine_ver
+            time: $time
+            access_token: $access_token
+        method: POST
+        url: /user/collect
+    validate:
+        - eq: [status_code, 200]
+        - eq: [content.msg, 操作成功]
+- test:
+    name: 我的游戏收藏
+    request:
+        data:
+            debug: $debug
+            from: $from
+            os: $os
+            app_id: $app_id
+            app_ver: $app_ver
+            engine_ver: $engine_ver
+            time: $time
+            access_token: $access_token
+        method: POST
+        url: /user/collect
+    validate:
+        - eq: [status_code, 200]
+        - eq: [content.msg, 操作成功]
+
+- test:
+    name: 我的游戏收藏
+    request:
+        data:
+            debug: $debug
+            from: $from
+            os: $os
+            app_id: $app_id
+            app_ver: $app_ver
+            engine_ver: $engine_ver
+            time: $time
+            access_token: $access_token
+        method: POST
+        url: /user/collect
+    validate:
+        - eq: [status_code, 200]
+        - eq: [content.msg, 操作成功]
+
+- test:
+    name: 我的游戏收藏
+    request:
+        data:
+            debug: $debug
+            from: $from
+            os: $os
+            app_id: $app_id
+            app_ver: $app_ver
+            engine_ver: $engine_ver
+            time: $time
+            access_token: $access_token
+        method: POST
+        url: /user/collect
+    validate:
+        - eq: [status_code, 200]
+        - eq: [content.msg, 操作成功]
+- test:
+    name: 我的游戏收藏
+    request:
+        data:
+            debug: $debug
+            from: $from
+            os: $os
+            app_id: $app_id
+            app_ver: $app_ver
+            engine_ver: $engine_ver
+            time: $time
+            access_token: $access_token
+        method: POST
+        url: /user/collect
+    validate:
+        - eq: [status_code, 200]
+        - eq: [content.msg, 操作成功]
+
+- test:
+    name: 我的游戏收藏
+    request:
+        data:
+            debug: $debug
+            from: $from
+            os: $os
+            app_id: $app_id
+            app_ver: $app_ver
+            engine_ver: $engine_ver
+            time: $time
+            access_token: $access_token
+        method: POST
+        url: /user/collect
+    validate:
+        - eq: [status_code, 200]
+        - eq: [content.msg, 操作成功]
+
+- test:
+    name: 我的游戏收藏
+    request:
+        data:
+            debug: $debug
+            from: $from
+            os: $os
+            app_id: $app_id
+            app_ver: $app_ver
+            engine_ver: $engine_ver
+            time: $time
+            access_token: $access_token
+        method: POST
+        url: /user/collect
+    validate:
+        - eq: [status_code, 200]
+        - eq: [content.msg, 操作成功]
+- test:
+    name: 我的游戏收藏
+    request:
+        data:
+            debug: $debug
+            from: $from
+            os: $os
+            app_id: $app_id
+            app_ver: $app_ver
+            engine_ver: $engine_ver
+            time: $time
+            access_token: $access_token
+        method: POST
+        url: /user/collect
+    validate:
+        - eq: [status_code, 200]
+        - eq: [content.msg, 操作成功]
+
+- test:
+    name: 我的游戏收藏
+    request:
+        data:
+            debug: $debug
+            from: $from
+            os: $os
+            app_id: $app_id
+            app_ver: $app_ver
+            engine_ver: $engine_ver
+            time: $time
+            access_token: $access_token
+        method: POST
+        url: /user/collect
+    validate:
+        - eq: [status_code, 200]
+        - eq: [content.msg, 操作成功]
+
+- test:
+    name: 我的游戏收藏
+    request:
+        data:
+            debug: $debug
+            from: $from
+            os: $os
+            app_id: $app_id
+            app_ver: $app_ver
+            engine_ver: $engine_ver
+            time: $time
+            access_token: $access_token
+        method: POST
+        url: /user/collect
+    validate:
+        - eq: [status_code, 200]
+        - eq: [content.msg, 操作成功]
+- test:
+    name: 我的游戏收藏
+    request:
+        data:
+            debug: $debug
+            from: $from
+            os: $os
+            app_id: $app_id
+            app_ver: $app_ver
+            engine_ver: $engine_ver
+            time: $time
+            access_token: $access_token
+        method: POST
+        url: /user/collect
+    validate:
+        - eq: [status_code, 200]
+        - eq: [content.msg, 操作成功]
+
+- test:
+    name: 我的游戏收藏
+    request:
+        data:
+            debug: $debug
+            from: $from
+            os: $os
+            app_id: $app_id
+            app_ver: $app_ver
+            engine_ver: $engine_ver
+            time: $time
+            access_token: $access_token
+        method: POST
+        url: /user/collect
+    validate:
+        - eq: [status_code, 200]
+        - eq: [content.msg, 操作成功]
+
+- test:
+    name: 我的游戏收藏
+    request:
+        data:
+            debug: $debug
+            from: $from
+            os: $os
+            app_id: $app_id
+            app_ver: $app_ver
+            engine_ver: $engine_ver
+            time: $time
+            access_token: $access_token
+        method: POST
+        url: /user/collect
+    validate:
+        - eq: [status_code, 200]
+        - eq: [content.msg, 操作成功]
+- test:
+    name: 我的游戏收藏
+    request:
+        data:
+            debug: $debug
+            from: $from
+            os: $os
+            app_id: $app_id
+            app_ver: $app_ver
+            engine_ver: $engine_ver
+            time: $time
+            access_token: $access_token
+        method: POST
+        url: /user/collect
+    validate:
+        - eq: [status_code, 200]
+        - eq: [content.msg, 操作成功]
+
+- test:
+    name: 我的游戏收藏
+    request:
+        data:
+            debug: $debug
+            from: $from
+            os: $os
+            app_id: $app_id
+            app_ver: $app_ver
+            engine_ver: $engine_ver
+            time: $time
+            access_token: $access_token
+        method: POST
+        url: /user/collect
+    validate:
+        - eq: [status_code, 200]
+        - eq: [content.msg, 操作成功]
+
+- test:
+    name: 我的游戏收藏
+    request:
+        data:
+            debug: $debug
+            from: $from
+            os: $os
+            app_id: $app_id
+            app_ver: $app_ver
+            engine_ver: $engine_ver
+            time: $time
+            access_token: $access_token
+        method: POST
+        url: /user/collect
+    validate:
+        - eq: [status_code, 200]
+        - eq: [content.msg, 操作成功]
+- test:
+    name: 我的游戏收藏
+    request:
+        data:
+            debug: $debug
+            from: $from
+            os: $os
+            app_id: $app_id
+            app_ver: $app_ver
+            engine_ver: $engine_ver
+            time: $time
+            access_token: $access_token
+        method: POST
+        url: /user/collect
+    validate:
+        - eq: [status_code, 200]
+        - eq: [content.msg, 操作成功]
+
+- test:
+    name: 我的游戏收藏
+    request:
+        data:
+            debug: $debug
+            from: $from
+            os: $os
+            app_id: $app_id
+            app_ver: $app_ver
+            engine_ver: $engine_ver
+            time: $time
+            access_token: $access_token
+        method: POST
+        url: /user/collect
+    validate:
+        - eq: [status_code, 200]
+        - eq: [content.msg, 操作成功]
+
+- test:
+    name: 我的游戏收藏
+    request:
+        data:
+            debug: $debug
+            from: $from
+            os: $os
+            app_id: $app_id
+            app_ver: $app_ver
+            engine_ver: $engine_ver
+            time: $time
+            access_token: $access_token
+        method: POST
+        url: /user/collect
+    validate:
+        - eq: [status_code, 200]
+        - eq: [content.msg, 操作成功]
+- test:
+    name: 我的游戏收藏
+    request:
+        data:
+            debug: $debug
+            from: $from
+            os: $os
+            app_id: $app_id
+            app_ver: $app_ver
+            engine_ver: $engine_ver
+            time: $time
+            access_token: $access_token
+        method: POST
+        url: /user/collect
+    validate:
+        - eq: [status_code, 200]
+        - eq: [content.msg, 操作成功]
+
+- test:
+    name: 我的游戏收藏
+    request:
+        data:
+            debug: $debug
+            from: $from
+            os: $os
+            app_id: $app_id
+            app_ver: $app_ver
+            engine_ver: $engine_ver
+            time: $time
+            access_token: $access_token
+        method: POST
+        url: /user/collect
+    validate:
+        - eq: [status_code, 200]
+        - eq: [content.msg, 操作成功]
+
+- test:
+    name: 我的游戏收藏
+    request:
+        data:
+            debug: $debug
+            from: $from
+            os: $os
+            app_id: $app_id
+            app_ver: $app_ver
+            engine_ver: $engine_ver
+            time: $time
+            access_token: $access_token
+        method: POST
+        url: /user/collect
+    validate:
+        - eq: [status_code, 200]
+        - eq: [content.msg, 操作成功]
+- test:
+    name: 我的游戏收藏
+    request:
+        data:
+            debug: $debug
+            from: $from
+            os: $os
+            app_id: $app_id
+            app_ver: $app_ver
+            engine_ver: $engine_ver
+            time: $time
+            access_token: $access_token
+        method: POST
+        url: /user/collect
+    validate:
+        - eq: [status_code, 200]
+        - eq: [content.msg, 操作成功]
+
+- test:
+    name: 我的游戏收藏
+    request:
+        data:
+            debug: $debug
+            from: $from
+            os: $os
+            app_id: $app_id
+            app_ver: $app_ver
+            engine_ver: $engine_ver
+            time: $time
+            access_token: $access_token
+        method: POST
+        url: /user/collect
+    validate:
+        - eq: [status_code, 200]
+        - eq: [content.msg, 操作成功]
+
+- test:
+    name: 我的游戏收藏
+    request:
+        data:
+            debug: $debug
+            from: $from
+            os: $os
+            app_id: $app_id
+            app_ver: $app_ver
+            engine_ver: $engine_ver
+            time: $time
+            access_token: $access_token
+        method: POST
+        url: /user/collect
+    validate:
+        - eq: [status_code, 200]
+        - eq: [content.msg, 操作成功]
+- test:
+    name: 我的游戏收藏
+    request:
+        data:
+            debug: $debug
+            from: $from
+            os: $os
+            app_id: $app_id
+            app_ver: $app_ver
+            engine_ver: $engine_ver
+            time: $time
+            access_token: $access_token
+        method: POST
+        url: /user/collect
+    validate:
+        - eq: [status_code, 200]
+        - eq: [content.msg, 操作成功]
+
+- test:
+    name: 我的游戏收藏
+    request:
+        data:
+            debug: $debug
+            from: $from
+            os: $os
+            app_id: $app_id
+            app_ver: $app_ver
+            engine_ver: $engine_ver
+            time: $time
+            access_token: $access_token
+        method: POST
+        url: /user/collect
+    validate:
+        - eq: [status_code, 200]
+        - eq: [content.msg, 操作成功]
+
+- test:
+    name: 我的游戏收藏
+    request:
+        data:
+            debug: $debug
+            from: $from
+            os: $os
+            app_id: $app_id
+            app_ver: $app_ver
+            engine_ver: $engine_ver
+            time: $time
+            access_token: $access_token
+        method: POST
+        url: /user/collect
+    validate:
+        - eq: [status_code, 200]
+        - eq: [content.msg, 操作成功]
+- test:
+    name: 我的游戏收藏
+    request:
+        data:
+            debug: $debug
+            from: $from
+            os: $os
+            app_id: $app_id
+            app_ver: $app_ver
+            engine_ver: $engine_ver
+            time: $time
+            access_token: $access_token
+        method: POST
+        url: /user/collect
+    validate:
+        - eq: [status_code, 200]
+        - eq: [content.msg, 操作成功]
+
+- test:
+    name: 我的游戏收藏
+    request:
+        data:
+            debug: $debug
+            from: $from
+            os: $os
+            app_id: $app_id
+            app_ver: $app_ver
+            engine_ver: $engine_ver
+            time: $time
+            access_token: $access_token
+        method: POST
+        url: /user/collect
+    validate:
+        - eq: [status_code, 200]
+        - eq: [content.msg, 操作成功]
+
+- test:
+    name: 我的游戏收藏
+    request:
+        data:
+            debug: $debug
+            from: $from
+            os: $os
+            app_id: $app_id
+            app_ver: $app_ver
+            engine_ver: $engine_ver
+            time: $time
+            access_token: $access_token
+        method: POST
+        url: /user/collect
+    validate:
+        - eq: [status_code, 200]
+        - eq: [content.msg, 操作成功]

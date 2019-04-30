@@ -1,6 +1,2 @@
-pizza = {
-    'crust': 'thick',
-    'toppings': [ 'mushrooms','extra mushrooms']
-}
-for topping in pizza['toppings']:
-    print(topping[1:5])
+res = '1f7dd06e5fac0ae46600a0b14f5ce76513df02c6'
+print(len(res))

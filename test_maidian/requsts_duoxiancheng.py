@@ -7,15 +7,7 @@ import uuid
 
 class postrequests():
     def __init__(self):
-        # 产生UUID
-        #         u = uuid.uuid1()
-        #         # 产生订单编号
-        orderID = 'TEST' + u.hex
         self.url = 'http://10.72.12.44:112/v1/chat/id'
-        self.data = {"payOrderNo": orderID, "userId": "16500", "activityId": "1103",
-                     "couponIdNumMap": {"2580": 2, "2581": 2, "2582": 2}}
-        self.headers = {'content-type': 'application/json'}
-        self.data = json.dumps(self.data)
 
     def post(self):
         try:
@@ -32,7 +24,7 @@ def kquan_bf():
 
 try:
     i = 0
-    tasks_number = 1000 # 开启线程数目
+    tasks_number = 10 # 开启线程数目
     print('测试启动')
     time1 = time.clock()
     while i < tasks_number:

@@ -1,4 +1,3 @@
-#coding:utf-8
 from time import *
 import unittest
 from appium import webdriver
@@ -27,10 +26,10 @@ class MyTestCase(unittest.TestCase):
         sleep(1)
         try:
             if self.driver.find_element_by_id("title_tv").is_displayed():
-                print "校验通过，检测到我的消息"
-        except Exception, e:
-            print e
-            print "校验不通过"
+                print("校验通过，检测到我的消息")
+        except Exception as e:
+            print(e)
+            print("校验不通过")
         self.driver.get_screenshot_as_file(r"D:\test_jietu\x1.png")
 
     def tearDown(self):

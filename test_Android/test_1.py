@@ -8,10 +8,10 @@ class MyTestCase(unittest.TestCase):
     def setUp(self):
         desired_caps = {
                 'platformName': 'Android',
-                'platformVersion': '6.0',
+                'platformVersion': '5.1',
                 'appPackage': 'com.idreamsky.avg.platform',
                 'appActivity': 'com.idreamsky.activity.HomeActivity',
-                'deviceName':  '127.0.0.1:7555',
+                'deviceName':  'afc7e8a4',
                 'noReset': 'True'}
         warnings.simplefilter("ignore", ResourceWarning)
         self.driver = webdriver.Remote('http://localhost:4723/wd/hub', desired_caps)
